@@ -1,0 +1,24 @@
+{
+  "name": "Aerospike Backup Dev (Ubuntu 24 ARM64)",
+  "runArgs": ["--platform=linux/arm64"],
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "containerEnv": {
+    "LD_LIBRARY_PATH": "/usr/local/lib:${LD_LIBRARY_PATH}"
+  },
+  "remoteUser": "vscode",
+  "postCreateCommand": "cd aerospike-tools-backup && git submodule update --init --recursive && make EVENT_LIB=libuv -j$(nproc)",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools"
+      ],
+      "settings": {
+        "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+      }
+    }
+  }
+}
+
